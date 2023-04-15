@@ -9,6 +9,6 @@ public interface CardService {
 
 	Card save(Card card);
 
-	boolean cardExists(String cardNumber);
+	boolean validationCardAlreadyExists(String cardNumber);
 
 }

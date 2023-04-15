@@ -32,8 +32,7 @@ public class Card {
 	@Column(name = "balance")
 	private BigDecimal balance;
 
-	public Card(Integer id, String cardNumber, String passwordCard) {
-		this.id = id;
+	public Card(String cardNumber, String passwordCard) {
 		this.cardNumber = cardNumber;
 		this.passwordCard = passwordCard;
 		this.balance = BigDecimal.valueOf(500);

@@ -24,24 +24,12 @@ public class CardServiceImpl implements CardService {
 	}
 
 	@Override
-	public boolean cardExists(String cardNumber) {
-		// implementation depends on your database or data access layer
-		// assuming that you have a CardRepository with a findByCardNumber method
-		if (findByCardNumber(cardNumber) != null){
-			return true;
+	public boolean validationCardAlreadyExists(String cardNumber) {
+		Optional<Card> optionalCard = cardRepository.findByCardNumber(cardNumber);
+		if (optionalCard.isPresent()) {
+			throw new NotFoundException("Card found for card number: " + cardNumber);
 		}
 		return false;
-	}
-
-	public CardDTO findByCardNumber(String cardNumber) {
-		Optional<Card> optionalCard = cardRepository.findByCardNumber(cardNumber);
-
-		if (optionalCard.isPresent()) {
-			return CardMapper.toDTO(optionalCard.get());
-		} else {
-			// Handle card not found error
-			throw new NotFoundException("Card not found for card number: " + cardNumber);
-		}
 	}
 
 }
