@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -51,6 +52,12 @@ public class CardServiceImpl implements CardService {
 			throw new NotFoundException("No cards found");
 		}
 		return cardList.stream().map(CardMapper::toDTO).collect(Collectors.toList());
+	}
+
+	public BigDecimal getCardBalance(String cardNumber) {
+		Card card = cardRepository.findByCardNumber(cardNumber)
+			.orElseThrow(() -> new NotFoundException("Card not found"));
+		return card.getBalance();
 	}
 
 }

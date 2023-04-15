@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.math.BigDecimal;
 import java.net.URI;
 import java.util.HashMap;
 import java.util.List;
@@ -38,7 +39,7 @@ public class CardController {
 		}
 	}
 
-	@GetMapping("/{id}")
+	@GetMapping("/id/{id}")
 	public ResponseEntity<Object> getCard(@PathVariable Integer id) {
 		try {
 			CardDTO card = cardService.getCard(id);
@@ -64,6 +65,16 @@ public class CardController {
 			return ResponseEntity.created(location).body(newCard);
 		} catch (NotFoundException e) {
 			return ResponseEntity.unprocessableEntity().body(e.getMessage());
+		}
+	}
+
+	@GetMapping("/{numeroCartao}")
+	public ResponseEntity<BigDecimal> getCardBalance(@PathVariable String numeroCartao) {
+		try {
+			BigDecimal balance = cardService.getCardBalance(numeroCartao);
+			return ResponseEntity.ok(balance);
+		} catch (NotFoundException e) {
+			return ResponseEntity.notFound().build();
 		}
 	}
 
