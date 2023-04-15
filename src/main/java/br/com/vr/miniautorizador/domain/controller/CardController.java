@@ -6,11 +6,15 @@ import br.com.vr.miniautorizador.domain.exception.NotFoundException;
 import br.com.vr.miniautorizador.domain.repository.CardRepository;
 import br.com.vr.miniautorizador.domain.service.impl.CardServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/cartoes")
@@ -21,6 +25,18 @@ public class CardController {
 
 	@Autowired
 	private CardServiceImpl cardService;
+
+	@GetMapping
+	public ResponseEntity<Object> getAllCards() {
+		try {
+			List<CardDTO> cards = cardService.getAllCards();
+			return ResponseEntity.ok().body(cards);
+		} catch (NotFoundException e) {
+			Map<String, String> errorMap = new HashMap<>();
+			errorMap.put("error", e.getMessage());
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMap);
+		}
+	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Object> getCard(@PathVariable Integer id) {
@@ -36,20 +52,17 @@ public class CardController {
 	public ResponseEntity<Object> createCard(@RequestBody Card card) {
 		try {
 			if (cardService.validationCardAlreadyExists(card.getCardNumber())) {
-				// return a 422 Unprocessable Entity response if the card already exists
 				return ResponseEntity.unprocessableEntity().build();
 			}
 
 			Card newCard = new Card(card.getCardNumber(), card.getPasswordCard());
 			cardService.save(newCard);
 
-			// return a 201 Created response with the created card in the body
 			URI location = ServletUriComponentsBuilder
 				.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(newCard.getId()).toUri();
 			return ResponseEntity.created(location).body(newCard);
 		} catch (NotFoundException e) {
-			// Handle card not found error
 			return ResponseEntity.unprocessableEntity().body(e.getMessage());
 		}
 	}

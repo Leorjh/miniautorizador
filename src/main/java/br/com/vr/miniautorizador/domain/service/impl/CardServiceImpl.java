@@ -10,7 +10,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -40,6 +42,15 @@ public class CardServiceImpl implements CardService {
 		} else {
 			throw new NotFoundException("Card not found with id " + cardId);
 		}
+	}
+
+	@Override
+	public List<CardDTO> getAllCards() {
+		List<Card> cardList = cardRepository.findAll();
+		if (cardList.isEmpty()) {
+			throw new NotFoundException("No cards found");
+		}
+		return cardList.stream().map(CardMapper::toDTO).collect(Collectors.toList());
 	}
 
 }
