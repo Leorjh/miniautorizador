@@ -32,4 +32,14 @@ public class CardServiceImpl implements CardService {
 		return false;
 	}
 
+	public CardDTO getCard(Integer cardId) {
+		Optional<Card> optionalCard = cardRepository.findById(cardId);
+
+		if (optionalCard.isPresent()) {
+			return CardMapper.toDTO(optionalCard.get());
+		} else {
+			throw new NotFoundException("Card not found with id " + cardId);
+		}
+	}
+
 }

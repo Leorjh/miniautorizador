@@ -11,4 +11,6 @@ public interface CardService {
 
 	boolean validationCardAlreadyExists(String cardNumber);
 
+	CardDTO getCard(Integer cardId);
+
 }
