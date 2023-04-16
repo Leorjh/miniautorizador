@@ -2,7 +2,7 @@ package br.com.vr.miniautorizador.domain.service.impl;
 
 import br.com.vr.miniautorizador.domain.dto.CardDTO;
 import br.com.vr.miniautorizador.domain.entity.Card;
-import br.com.vr.miniautorizador.domain.exception.NotFoundException;
+import br.com.vr.miniautorizador.domain.exception.CardException;
 import br.com.vr.miniautorizador.domain.mapper.CardMapper;
 import br.com.vr.miniautorizador.domain.repository.CardRepository;
 import br.com.vr.miniautorizador.domain.service.CardService;
@@ -30,7 +30,7 @@ public class CardServiceImpl implements CardService {
 	public boolean validationCardAlreadyExists(String cardNumber) {
 		Optional<Card> optionalCard = cardRepository.findByCardNumber(cardNumber);
 		if (optionalCard.isPresent()) {
-			throw new NotFoundException("Card found for card number: " + cardNumber);
+			throw new CardException("Card found for card number: " + cardNumber);
 		}
 		return false;
 	}
@@ -41,7 +41,7 @@ public class CardServiceImpl implements CardService {
 		if (optionalCard.isPresent()) {
 			return CardMapper.toDTO(optionalCard.get());
 		} else {
-			throw new NotFoundException("Card not found with id " + cardId);
+			throw new CardException("Card not found with id " + cardId);
 		}
 	}
 
@@ -49,14 +49,14 @@ public class CardServiceImpl implements CardService {
 	public List<CardDTO> getAllCards() {
 		List<Card> cardList = cardRepository.findAll();
 		if (cardList.isEmpty()) {
-			throw new NotFoundException("No cards found");
+			throw new CardException("No cards found");
 		}
 		return cardList.stream().map(CardMapper::toDTO).collect(Collectors.toList());
 	}
 
 	public BigDecimal getCardBalance(String cardNumber) {
 		Card card = cardRepository.findByCardNumber(cardNumber)
-			.orElseThrow(() -> new NotFoundException("Card not found"));
+			.orElseThrow(() -> new CardException("Card not found"));
 		return card.getBalance();
 	}
 

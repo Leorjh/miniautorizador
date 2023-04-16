@@ -2,7 +2,7 @@ package br.com.vr.miniautorizador.domain.controller;
 
 import br.com.vr.miniautorizador.domain.dto.CardDTO;
 import br.com.vr.miniautorizador.domain.entity.Card;
-import br.com.vr.miniautorizador.domain.exception.NotFoundException;
+import br.com.vr.miniautorizador.domain.exception.CardException;
 import br.com.vr.miniautorizador.domain.repository.CardRepository;
 import br.com.vr.miniautorizador.domain.service.impl.CardServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +32,7 @@ public class CardController {
 		try {
 			List<CardDTO> cards = cardService.getAllCards();
 			return ResponseEntity.ok().body(cards);
-		} catch (NotFoundException e) {
+		} catch (CardException e) {
 			Map<String, String> errorMap = new HashMap<>();
 			errorMap.put("error", e.getMessage());
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMap);
@@ -44,7 +44,7 @@ public class CardController {
 		try {
 			CardDTO card = cardService.getCard(id);
 			return ResponseEntity.ok().body(card);
-		} catch (NotFoundException e) {
+		} catch (CardException e) {
 			return ResponseEntity.unprocessableEntity().body(e.getMessage());
 		}
 	}
@@ -63,7 +63,7 @@ public class CardController {
 				.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(newCard.getId()).toUri();
 			return ResponseEntity.created(location).body(newCard);
-		} catch (NotFoundException e) {
+		} catch (CardException e) {
 			return ResponseEntity.unprocessableEntity().body(e.getMessage());
 		}
 	}
@@ -73,7 +73,7 @@ public class CardController {
 		try {
 			BigDecimal balance = cardService.getCardBalance(numeroCartao);
 			return ResponseEntity.ok(balance);
-		} catch (NotFoundException e) {
+		} catch (CardException e) {
 			return ResponseEntity.notFound().build();
 		}
 	}
