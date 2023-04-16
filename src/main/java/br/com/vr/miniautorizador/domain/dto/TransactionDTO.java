@@ -21,9 +21,4 @@ public class TransactionDTO {
 	@NotNull
 	private BigDecimal value;
 
-//	public TransactionDTO(String cardNumber, String passwordCard, BigDecimal value) {
-//		this.cardNumber = cardNumber;
-//		this.passwordCard = passwordCard;
-//		this.value = value;
-//	}
 }

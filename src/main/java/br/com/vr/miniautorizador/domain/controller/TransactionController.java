@@ -47,11 +47,9 @@ public class TransactionController {
 				throw new CardException(StatusTransactionCard.SALDO_INSUFICIENTE + " card number: " + transactionDTO.getCardNumber());
 			}
 
-//			// atualizar o saldo do cartão e salvar a transação
 			card.get().setBalance(card.get().getBalance().subtract(transactionDTO.getValue()));
 			cardService.save(card.get());
-//
-//			// retornar a resposta com o código 201 Created e o corpo da resposta com o objeto da transação
+
 			URI location = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(card.get().getId()).toUri();
 			return ResponseEntity.created(location).body(transactionDTO);
