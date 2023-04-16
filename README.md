@@ -23,14 +23,14 @@ Detalhes do desafio e alguns requisitos podem ser visualizados no arquivo DESAFI
 # Passos para rodar o projeto
 - Baixe o projeto do github
 
-``` Git clone https://github.com/Leorjh/miniautorizador.git ```
+``` git clone https://github.com/Leorjh/miniautorizador.git ```
  - Na pasta raiz do projeto:
 
 ``` cd docker && docker-compose up -d ```
 
 - Utilizando a IDE execute o arquivo de aplicação MiniautorizadorApplication.java
 
-Tendo java 17 instalado na máquina é possível buildar o projeto e rodar por comandos maven dentro da pasta raiz:
+Tendo java 17  e maven instalado na máquina é possível buildar o projeto e rodar por comandos maven dentro da pasta raiz:
 
 ``` mvn clean compile ```
 
@@ -44,12 +44,16 @@ Tendo java 17 instalado na máquina é possível buildar o projeto e rodar por c
   "cardNumber": "123",
   "passwordCard": "pass123"
   }
+  ```
+
+
 - PUT json exemplo:
   ```
   {
   "balance": "1000",
   "passwordCard": "pass123"
   }
+  ```
 ## Card Controller
 | Método | Path                    | Descrição                    |
 |--------|-------------------------|------------------------------|
@@ -61,6 +65,22 @@ Tendo java 17 instalado na máquina é possível buildar o projeto e rodar por c
 | DELETE | /cartoes/{id}           | Deleta um cartão pelo id     |
 
 * *Só é possível atualizar o saldo e colocando a senha correta no body
+
+## Transaction Controller
+
+- Validação do número do cartão, senha e saldo
+- Exemplo json para efetuar uma transação:
+
+```
+{
+    "cardNumber": "123",
+    "passwordCard": "pass123",
+    "value": "50"
+}
+```
+| Método | Path                    | Descrição                          |
+|--------|-------------------------|------------------------------------|
+| POST   | /transacoes             | Efetua uma transação para o cartão |
 
 # Formatação do projeto
  - Classe principal
