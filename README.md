@@ -1,7 +1,7 @@
 # Miniautorizador
 Miniautorizador desafio técnico para empresa VR
 
-Ideia é disponibilizar uma pequena amostra de um autorizador de transações para cartões.
+Pequena amostra de um autorizador de transações para cartões.
 
 Detalhes do desafio e alguns requisitos podem ser visualizados no arquivo DESAFIO.md
 
@@ -14,12 +14,17 @@ Detalhes do desafio e alguns requisitos podem ser visualizados no arquivo DESAFI
  - Lombok
  - Hibernate
  - JPA
+ - Swagger
 # Instalações necessárias
  - JDK => 11
  - Git
  - Docker
  - IDE
 # Passos para rodar o projeto
+ - Git clone https://github.com/Leorjh/miniautorizador.git
+ - Na pasta raiz do projeto:
+# Swagger
+ - http://localhost:8080/swagger-ui/index.html#/
 # Rotas e Validações
 # Formatação do projeto
 # Conhecimento e dificuldades
