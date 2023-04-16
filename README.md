@@ -158,3 +158,25 @@ Desafios (não obrigatórios):
   Exemplo: dado que um cartão possua R$10.00 de saldo. Se fizermos 2 transações de R$10.00 ao mesmo tempo, em instâncias diferentes da aplicação, como o sistema deverá se comportar?
 	* Utilizando-se de mecanismo de transações como o ACID (Atomicidade, Consistência, Isolamento e Durabilidade)
     * Uso de concorrência, permitindo utilização de locks e bloqueando alguns registros. Assim se uma transação estiver sendo feita o sistema não ira permitir outra até que a primeira seja finalizada.
+
+# Utilização de banco de dados H2
+
+- Se quiser utilizar o banco H2 para a aplicação, substituindo o uso do MySQL no docker compose:
+	- Adicione a dependência ao pom.xml:
+```
+<dependency>
+	<groupId>com.h2database</groupId>
+	<artifactId>h2</artifactId>
+	<scope>runtime</scope>
+</dependency>
+```
+- E altere as properties no application.properties:
+```
+spring.datasource.url=jdbc:h2:mem:miniauth
+spring.datasource.driverClassName=org.h2.DriverYES
+spring.datasource.username=sa
+spring.datasource.password=123
+spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
+spring.h2.console.enabled=true
+spring.h2.console.path=/h2
+```
