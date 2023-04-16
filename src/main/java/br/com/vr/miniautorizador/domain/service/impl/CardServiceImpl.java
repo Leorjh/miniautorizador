@@ -7,7 +7,6 @@ import br.com.vr.miniautorizador.domain.mapper.CardMapper;
 import br.com.vr.miniautorizador.domain.repository.CardRepository;
 import br.com.vr.miniautorizador.domain.service.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
