@@ -115,6 +115,41 @@ Tendo java 17  e maven instalado na máquina é possível buildar o projeto e ro
 
 Apresente observações/problemas sobre essa solução.
 Comente qual(is) a(s) sua(s) estratégia(s) para melhorar este sistema em termos de qualidade e manutenção. Justifique suas decisões.
+
+* Resposta:
+
+Algumas observações feitas:
+- Controller com toda a regra de negócio, montando e repassando o domínio para aplicação. É complicado mexer aqui e de conseguir manter;
+- A camada de aplicação repassando apenas a informação para o repositório;
+- Nenhum teste encontrado, ficando difícil manter a integridade das informações e o sucesso dos processos;
+- Não observei preocupação com a segurança.
+
+Primeiro procuraria pela documentação e informações sobre tarefas e melhorias. Entenderia do que se trata de fato essa aplicação e seus requisitos principais. Após entender melhor todo o cenário, começaria a mexer um pouco no código. Separando a camada de lógica, modulando e tornando mais fácil de mexer e manter. Removeria o que não fosse necessário, como essa parte onde diz que a aplicação apenas repassa o objeto ao repositório. Inclusão de testes unitários e teste automatizados. Monitoramento da aplicação, para entender melhor a saude. Práticas de segurança, ainda mais se tratando de processamento de informações sensíveis.
+
+2. Descreva quais são as principais limitações ao se adotar servidores de aplicação em uma arquitetura orientada a microsserviços.
+
+* Resposta:
+
+As principais limitações ao adotar microserviços são:
+- Aumento da complexidade;
+- Performance;
+- Aplicação sendo um monolíto tudo está muito amarrado, sendo díficil de manter e alterar;
+- Monitoramento;
+- Dependência, tornando-se díficil caso seja necessário alguma migração.
+
+O ideal seria possuir os microserviços em containers sem dependências e utilizar por exemplo Kubernetes para sua orquestação.
+3. Atualmente, diversas aplicações escritas em Java estão deixando de serem desenvolvidas para rodarem em servidores (JBoss, Tomcat), adotando ferramentas que disponibilizam um servidor embutido na própria ferramenta. Quais são os principais desafios ao se tomar uma decisão dessas? Justifique sua resposta.
+
+* Resposta:
+
+Os principais desafios são:
+
+- Migração e configuração correta da aplicação;
+- Escalabilidade, garantir que a aplicação será escalonável, pois adotando servidor na própria ferramenta os recursos podem ficar mais limitados;
+- Pode ser mais difícil a criação de uma arquitetura de microserviços;
+- Garantir que a aplicação estará nos padrões.
+
+Em suma, em termos de configurações e implatação utilização de servidores embutidos pode ser mais fácil, porém é necessário analisar todo o contexto a fim de verificar se é a melhor solução.
 # Desafios propostos
 Desafios (não obrigatórios):
 * é possível construir a solução inteira sem utilizar nenhum if. Só não pode usar *break* e *continue*!
