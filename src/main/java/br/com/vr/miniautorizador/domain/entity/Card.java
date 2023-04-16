@@ -28,7 +28,6 @@ public class Card {
 	@Column(name = "password_card")
 	private String passwordCard;
 
-	@NotNull
 	@Column(name = "balance")
 	private BigDecimal balance;
 

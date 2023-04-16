@@ -51,6 +51,12 @@ public class CardController {
 
 	@PostMapping
 	public ResponseEntity<Object> createCard(@RequestBody Card card) {
+		if (card.getCardNumber() == "") {
+			return ResponseEntity.unprocessableEntity().body("Necessário informar o número do cartão.");
+		}
+		if (card.getPasswordCard() == "") {
+			return ResponseEntity.unprocessableEntity().body("Necessário informar a senha do cartão.");
+		}
 		try {
 			if (cardService.validationCardAlreadyExists(card.getCardNumber())) {
 				return ResponseEntity.unprocessableEntity().build();
@@ -78,6 +84,25 @@ public class CardController {
 		}
 	}
 
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> deleteCard(@PathVariable Integer id) {
+		try {
+			cardService.deleteCard(id);
+			return ResponseEntity.noContent().build();
+		} catch (CardException e) {
+			return ResponseEntity.notFound().build();
+		}
+	}
 
+	@PutMapping("/{id}")
+	public ResponseEntity<Object> updateCard(@PathVariable Integer id, @RequestBody Card card) {
+		try {
+			cardService.updateCard(id, card);
+			String returnOkMsg = "Atualização finalizada para o cartão: ";
+			return ResponseEntity.ok().body(returnOkMsg + card.getCardNumber());
+		} catch (CardException e) {
+			return ResponseEntity.unprocessableEntity().body(e.getMessage());
+		}
+	}
 
 }

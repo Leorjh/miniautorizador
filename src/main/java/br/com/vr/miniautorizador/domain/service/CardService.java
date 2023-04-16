@@ -2,6 +2,7 @@ package br.com.vr.miniautorizador.domain.service;
 
 import br.com.vr.miniautorizador.domain.dto.CardDTO;
 import br.com.vr.miniautorizador.domain.entity.Card;
+import br.com.vr.miniautorizador.domain.exception.CardException;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -20,4 +21,6 @@ public interface CardService {
 
 	BigDecimal getCardBalance(String cardNumber);
 
+	Card updateCard(Integer cardId, Card card);
+	void deleteCard(Integer cardId);
 }
