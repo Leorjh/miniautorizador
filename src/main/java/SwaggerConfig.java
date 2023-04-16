@@ -8,8 +8,8 @@ public class SwaggerConfig {
 	@Bean
 	public GroupedOpenApi publicApi() {
 		return GroupedOpenApi.builder()
-			.group("springshop-public")
-			.pathsToMatch("/public/**")
+			.group("REST API")
+			.pathsToMatch("*")
 			.build();
 	}
 }
