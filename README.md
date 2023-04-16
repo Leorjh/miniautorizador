@@ -64,7 +64,7 @@ Tendo java 17  e maven instalado na máquina é possível buildar o projeto e ro
 | PUT    | /cartoes/{id}           | Atualiza um cartão pelo id * |
 | DELETE | /cartoes/{id}           | Deleta um cartão pelo id     |
 
-* *Só é possível atualizar o saldo e colocando a senha correta no body
+* *Só é possível atualizar o saldo, colocando a senha correta no body
 
 ## Transaction Controller
 
