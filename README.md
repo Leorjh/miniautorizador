@@ -133,11 +133,11 @@ Primeiro procuraria pela documentação e informações sobre tarefas e melhoria
 As principais limitações ao adotar microserviços são:
 - Aumento da complexidade;
 - Performance;
-- Aplicação sendo um monolíto tudo está muito amarrado, sendo díficil de manter e alterar;
+- Aplicação sendo um monolíto tudo está muito amarrado, sendo difícil de manter e alterar;
 - Monitoramento;
-- Dependência, tornando-se díficil caso seja necessário alguma migração.
+- Dependência, tornando-se difícil caso seja necessário alguma migração.
 
-O ideal seria possuir os microserviços em containers sem dependências e utilizar por exemplo Kubernetes para sua orquestação.
+O ideal seria possuir os microserviços em containers sem dependências e utilizar por exemplo Kubernetes para sua orquestração.
 
 3. Atualmente, diversas aplicações escritas em Java estão deixando de serem desenvolvidas para rodarem em servidores (JBoss, Tomcat), adotando ferramentas que disponibilizam um servidor embutido na própria ferramenta. Quais são os principais desafios ao se tomar uma decisão dessas? Justifique sua resposta.
 
